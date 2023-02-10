@@ -34,14 +34,14 @@ end
 -- // Hook
 local __index
 __index = hookmetamethod(game, "__index", function(t, k)
-    -- // Check if it trying to get our mouse's hit or target and see if we can use it
-    if (t:IsA("Mouse") and (k == "Hit" or k == "Target") and AimingChecks.IsAvailable() and DaHoodSettings.SilentAim) then
-        -- // Vars
-        local SelectedPart = AimingSelected.Part
-        local Hit = DaHoodSettings.ApplyPredictionFormula(SelectedPart, AimingSelected.Velocity * Vector3.new(1, 0.1, 1))
+    -- // Check if it's trying to get the mouse's hit or target and see if we can use it
+    if (t:IsA("Mouse") and (k:lower() == "hit" or k:lower() == "target") and AimingChecks.IsAvailable() and DaHoodSettings.SilentAim) then
+        -- // Variables
+        local selectedPart = AimingSelected.Part
+        local hit = DaHoodSettings.ApplyPredictionFormula(selectedPart, AimingSelected.Velocity * Vector3.new(1, 0.1, 1))
 
-        -- // Return modded val
-        return (k == "Hit" and Hit or SelectedPart)
+        -- // Return the modified value
+        return (k:lower() == "hit" and hit or selectedPart)
     end
 
     -- // Return
